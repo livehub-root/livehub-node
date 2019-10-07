@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>height</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        // var ceshi = [
+        //     [
+        //     1n,
+        //     1000,
+        //     1n
+        // ]
+        // ]
+        var data = {
+            "did": 1001,
+            "data": [
+                {
+                    "time": "1527827886002",
+                    "oid": 10003,
+                    "height": 15387,
+                },
+                {
+                    "time": "1527827887003",
+                    "oid": 10004,
+                    "height": 17387,
+                },
+                {
+                    "time": "1527827887004",
+                    "oid": 10004,
+                    "height": 17387,
+                }
+            ]
+        }
+        $.ajax({
+            url: 'http://lmaster.top:3000/height?stime=1562150930000&oid=10003&limit=100',
+            type: 'POST',
+            headers: {
+                'Content-Type': 'text/plain',
+                // 'power-livehub': 'lmaster',
+            },
+            data: JSON.stringify(data),
+            success: function (res) {
+                console.log(res)
+            },
+            error: function (xhr, status, error) {
+
+            }
+        });
+    </script>
+</body>
+
+</html>
