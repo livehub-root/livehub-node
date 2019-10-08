@@ -13,13 +13,10 @@ catch (err) {
  * GET /
  */
 export const get = (req: Request, res: Response) => {
-    let json = {
+    let json: getResponseJson = {
         code: -1,
-        msg: 'something wrong',
-        data: {},
-        fields: {}
+        msg: 'something wrong'
     }
-    let data
     try {
         let query = req.query
         // select ts,oid,height,did from height limit 1000;
@@ -58,11 +55,10 @@ export const get = (req: Request, res: Response) => {
         console.log(sql)
 
         taosCursor.execute(sql)
-        data = taosCursor.fetchall();
         json.code = 0
         json.msg = 'ok'
-        json.data = data
-        json.fields = taosCursor.fields
+        json.data = taosCursor.fetchall();
+        json.fields = ['ts', 'oid', 'height', 'did']
     }
     catch (err) {
         // throw err;
@@ -80,10 +76,9 @@ export const get = (req: Request, res: Response) => {
  * POST /
  */
 export const post = (req: Request, res: Response) => {
-    let json = {
+    let json: postResponseJson = {
         code: -1,
-        msg: 'something wrong',
-        data: {}
+        msg: 'something wrong'
     }
     let height = JSON.parse(req.body)
     let sql = 'INSERT INTO height' + height.did
@@ -107,30 +102,3 @@ export const post = (req: Request, res: Response) => {
 
     res.json(json)
 };
-
-
-/**
- * 解决 json bigint 问题
- * https://golb.hplar.ch/2019/01/js-bigint-json.html
- */
-function parseReviver(key: any, value: any) {
-    if (typeof value === 'string' && /^\d+n$/.test(value)) {
-        return BigInt(value.slice(0, -1));
-    }
-    return value;
-}
-
-function stringifyReplacer(key: any, value: any) {
-    if (typeof value === 'bigint') {
-        return value.toString() + 'n';
-    } else {
-        return value;
-    }
-}
-
-function isEmpty(obj: object) {
-    for (let key in obj) {
-        return false;
-    }
-    return true;
-}
