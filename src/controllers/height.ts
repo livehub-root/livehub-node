@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { taosCursor } from "../taos";
+import { getResponseJson, postResponseJson } from "../interface/response";
+import { stringifyReplacer, parseReviver, isEmpty } from "../util/tools";
 
-var JSONbig = require('json-bigint')
 // use livehub
 try {
     taosCursor.execute('use livehub;');
@@ -80,7 +81,7 @@ export const post = (req: Request, res: Response) => {
         code: -1,
         msg: 'something wrong'
     }
-    let height = JSON.parse(req.body)
+    let height = JSON.parse(req.body, parseReviver)
     let sql = 'INSERT INTO height' + height.did
     sql += ' USING height TAGS (' + height.did + ') VALUES'
     for (let item of height.data) {

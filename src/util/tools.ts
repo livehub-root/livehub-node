@@ -12,7 +12,7 @@
  * @param key
  * @param value
  */
-function parseReviver(key: any, value: any) {
+export function parseReviver(key: any, value: any) {
     if (typeof value === 'string' && /^\d+n$/.test(value)) {
         return BigInt(value.slice(0, -1));
     }
@@ -24,7 +24,7 @@ function parseReviver(key: any, value: any) {
  * @param key
  * @param value
  */
-function stringifyReplacer(key: any, value: any): number | string {
+export function stringifyReplacer(key: any, value: any): number | string {
     if (typeof value === 'bigint') {
         return value.toString() + 'n';
     } else {
@@ -37,7 +37,7 @@ function stringifyReplacer(key: any, value: any): number | string {
  * 判断对象是否为空
  * @param obj
  */
-function isEmpty(obj: object): boolean {
+export function isEmpty(obj: object): boolean {
     for (let key in obj) {
         return false;
     }

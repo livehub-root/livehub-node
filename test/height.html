@@ -20,26 +20,25 @@
         // ]
         var data = {
             "did": 1001,
-            "data": [
-                {
-                    "time": "1527827886002",
-                    "oid": 10003,
+            "data": [{
+                    "time": "1527827986002",
+                    "oid": "10002n",
                     "height": 15387,
                 },
                 {
-                    "time": "1527827887003",
-                    "oid": 10004,
+                    "time": "1527827987003",
+                    "oid": "10004n",
                     "height": 17387,
                 },
                 {
-                    "time": "1527827887004",
-                    "oid": 10004,
+                    "time": "1527827987004",
+                    "oid": "10001n",
                     "height": 17387,
                 }
             ]
         }
         $.ajax({
-            url: 'http://lmaster.top:3000/height?stime=1562150930000&oid=10003&limit=100',
+            url: 'http://lmaster.top/height',
             type: 'POST',
             headers: {
                 'Content-Type': 'text/plain',
