@@ -3,13 +3,7 @@ import { taosCursor } from "../taos";
 import { getResponseJson, postResponseJson } from "../interface/response";
 import { stringifyReplacer, parseReviver, isEmpty } from "../util/tools";
 
-// use livehub
-try {
-    taosCursor.execute('use livehub;');
-}
-catch (err) {
-    throw err;
-}
+
 /**
  * GET /
  */

@@ -1,16 +1,14 @@
-// import logger from "./logger";
+import { runtimeLog as logger } from "./logger";
 import dotenv from "dotenv";
 import fs from "fs";
 
 if (fs.existsSync(".env")) {
-    // logger.debug("Using .env file to supply config environment variables");
+    logger.debug("Using .env file to supply config environment variables");
     dotenv.config({ path: ".env" });
 } else {
-    // logger.debug("Using .env.example file to supply config environment variables");
+    logger.debug("Using .env.example file to supply config environment variables");
     dotenv.config({ path: ".env.example" });  // you can delete this after you create your own .env file!
 }
-export const ENVIRONMENT = process.env.NODE_ENV;
-const prod = ENVIRONMENT === "production"; // Anything else is treated as 'dev'
 
 export const TAOS = {
     host: process.env["TAOS_HOST"],
@@ -21,7 +19,7 @@ export const TAOS = {
 };
 
 if (!TAOS) {
-    // logger.error("No client secret. Set TAOS environment variable.");
+    logger.error("Secret is wrong, set TAOS failed.");
     process.exit(1);
 }
 
